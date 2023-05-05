@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci recurciba</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,400;0,700;0,900;1,100;1,900&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Poppins', sans-serif; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #e7e7e7; padding: 0;">
+    <!--Dado un numero calcular su numero anterior y crear los siguientes 100 dijitos de la secuencia-->
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 80%; padding: 2rem; border-radius: .5rem; background-color: #fff; box-shadow: 5px 5px 6px #2e2e2e54;">
+        <h1 style="margin: 0; margin-bottom: 1rem; font-size: 2.5rem;">Fibonacci con funciones recurcibas</h1>
+        <label style="text-align: center; width: 60%; font-size: 1.2rem; margin-bottom: 1rem;">Ingrese por cual numero quiere comensar la secuencia:</label>
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <input type="number" placeholder="Numero inicial" id="numero" style="font-size: 1.2rem; padding: .5rem 1rem; border-radius: .5rem; border: .2rem solid #01a1d1; text-align: center;" value="0" />
+            <button style="background-color: #fff; outline: none; font-size: 1.2rem; border: .2rem solid #01a1d1; color: #01a1d1; padding: .5rem 1rem; margin: 0 1rem; border-radius: .5rem;" onclick="Calcular()">Calcular</button>
+        </div>
+        <p style="text-align: justify; width: 60%; font-size: 1.2rem;"><i style="font-weight: 900;">Nota:</i> Para el calculo inicial de la secuencia se topara como numero anterior el numero que ingrese menos 1</p>
+        <div id="result" style="background-image: url('r_optimized.png'); background-size: cover; background-position: center; background-repeat: no-repeat; background-blend-mode: color-burn; display: flex; flex-wrap: wrap; align-items: start; justify-content: space-evenly; background-color: #e8f4f8; border-radius: 1rem; padding: 1rem; width: 90%; min-height: 30vh; max-height: 70vh; text-align: justify; overflow-y: auto; overflow-x: hidden;"></div>
+        <button style="background-color: #01a1d1; outline: none; font-size: 1.2rem; border: .2rem solid #FFF; color: #FFF; padding: .5rem 1rem; margin: .5rem 3%; margin-left: auto; border-radius: .5rem;" onclick="Limpiar(0)">Limpiar</button>
+    </div>
+    <script>
+        var valorInicial = 0;
+        var valorSecundario = 0;
+        var interacion = 100;
+        var result="";
+
+        function Calcular(){
+            if(result != ""){
+                Limpiar(1);
+            }
+            valorSecundario = document.getElementById("numero").value;
+            valorInicial = valorSecundario - 1;
+            valorSecundario = valorInicial + 1;
+            result = result + "<p id='dat-result' style='color: #535353; font-size: 1rem; font-weight: 400; margin: 0; margin-right: 1rem; margin-bottom: .5rem;'>" + valorInicial + ",</p>";
+            result = result + "<p id='dat-result' style='color: #535353; font-size: 1rem; font-weight: 400; margin: 0; margin-right: 1rem; margin-bottom: .5rem;'>" + valorSecundario + ",</p>";
+            Fibonacci();
+            document.getElementById("result").innerHTML = result;
+        }
+
+        function Fibonacci(){
+            let valorSiguiente = valorSecundario + valorInicial;
+            valorInicial = valorSecundario;
+            valorSecundario = valorSiguiente;
+            result = result + "<p id='dat-result' style='color: #535353; font-size: 1rem; font-weight: 400; margin: 0; margin-right: 1rem; margin-bottom: .5rem;'>" + valorSiguiente + ",</p>";
+            if(interacion != 0){
+                interacion--;
+                Fibonacci();
+            }
+        }
+
+        function Limpiar(event){
+            valorInicial = 0;
+            valorSecundario = 0; 
+            interacion = 100;
+            result = "";
+            document.getElementById("result").innerHTML = "";
+            if(event === 0){
+                document.getElementById("numero").value = 0;
+            }
+        }
+    </script>
+</body>
+</html>
